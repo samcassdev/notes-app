@@ -7,7 +7,7 @@ const MongoClient = require('mongodb').MongoClient
 
 var db
 
-MongoClient.connect('mongodb+srv://samcasseusdev:myapp@cluster1-5esbr.mongodb.net/star-wars-quotes?retryWrites=true', (err, client) => {
+MongoClient.connect('mongodb+srv://samcasseusdev:myapp@cluster1-5esbr.mongodb.net/star-wars-test?retryWrites=true', (err, client) => {
   if (err) return console.log(err)
   db = client.db('star-wars-quotes')
   app.listen(3000, () => {
@@ -61,7 +61,7 @@ app.put('/quotes', (req, res) => {
 
 
 app.delete('/quotes', (req, res) => {
-  db.collection('quotes').findOneAndDelete({name: req.body.name},
+  db.collection('quotes').findOneAndDelete({name: req.body.name, quote: req.body.quote},
   (err, result) => {
     if (err) return res.send(500, err)
     res.send({message: 'A darth vadar quote got deleted'})
